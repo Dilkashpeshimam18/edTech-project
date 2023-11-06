@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const mongoose=require('mongoose')
+const authRoutes=require('./routes/auth')
+const courseRoutes=require('./routes/course')
 
 const app = express()
 
@@ -16,6 +18,9 @@ mongoose.connect(
     {useUnifiedTopology:true,useNewUrlParser:true},
 ).then(() => console.log('Connected to db successfully'))
 .catch((err) => { console.error(err); });
+
+app.use('/auth',authRoutes)
+app.use('/course',courseRoutes)
 
 app.listen(4000, () => {
     console.log('SERVER RUNNING!!')
