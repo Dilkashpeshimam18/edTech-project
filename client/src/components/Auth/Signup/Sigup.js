@@ -1,0 +1,71 @@
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+
+const SignUp = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const navigate = useNavigate()
+
+    const handleSignUp = async (e) => {
+        e.preventDefault()
+        try {
+
+            if (name != '' && email != '' && password != '') {
+                const data = {
+                    name: name,
+                    email: email,
+                    password: password,
+                }
+
+                await axios.post('http://localhost:4000/auth/signup', data)
+                alert('Sign up successful!')
+                setName('')
+                setEmail('')
+                setPassword('')
+                navigate('/login')
+
+            }
+
+
+
+        } catch (err) {
+            console.log(err)
+            alert(err)
+        }
+    }
+
+    return (
+        <div>
+            <div className='login__container'>
+                <div className='login__subContainer'>
+                    <form onSubmit={handleSignUp} >
+                        <h2>SIGN UP</h2>
+                        <div className='login__inputContainer'>
+                            <h3 className='login__subTitle'>Name</h3>
+                            <input className='login__input' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                        </div>
+                        <div className='login__inputContainer'>
+                            <h3 className='login__subTitle'>Email</h3>
+                            <input className='login__input' type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className='login__inputContainer'>
+                            <h3 className='login__subTitle'>Password</h3>
+                            <input className='login__input' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <button className='login__button'>SIGN UP</button>
+                    </form>
+                    <div className='login__link'>
+                        <Link style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }} to='/login'><h3 style={{ cursor: 'pointer', fontSize: '13px' }}>Login with existing account</h3></Link>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default SignUp
