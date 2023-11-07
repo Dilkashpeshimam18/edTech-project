@@ -724,4 +724,4 @@ const courseModel = [
     },
 ];
 
-export default courseModel;
+module.exports=courseModel;

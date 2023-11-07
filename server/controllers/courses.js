@@ -2,7 +2,8 @@ const courseData = require('../data/courses')
 
 exports.getAllCourse = (req, res) => {
     try {
-        res.status(200).json({ success: true, courseData })
+        const allCourse=courseData
+        res.status(200).json({ success: true, allCourse})
 
     } catch (err) {
         console.log(err)
