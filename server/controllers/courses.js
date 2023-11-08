@@ -1,10 +1,25 @@
 const courseData = require('../data/courses')
 const EnrolledCourse = require('../models/enrolledCourse')
 
-exports.getAllCourse = (req, res) => {
+exports.getAllCourse = async (req, res) => {
     try {
-        const allCourse = courseData
-        res.status(200).json({ success: true, allCourse })
+        // const allCourse = courseData
+        // res.status(200).json({ success: true, allCourse })
+        const page = parseInt(req.query.page) || 1;
+        const rowPerPage = parseInt(req.query.rowPerPage) || 10;
+        const startIndex = (page - 1) * rowPerPage;
+        const endIndex = startIndex + rowPerPage;
+
+        const coursesForPage = courseData.slice(startIndex, endIndex);
+
+        const totalCourses = courseData.length;
+        const totalPages = Math.ceil(totalCourses / rowPerPage);
+
+        return res.status(200).json({
+            courses: coursesForPage,
+            currentPage: page,
+            totalPages: totalPages,
+        });
 
     } catch (err) {
         console.log(err)
