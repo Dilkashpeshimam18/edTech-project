@@ -1,9 +1,10 @@
 const courseData = require('../data/courses')
+const EnrolledCourse = require('../models/enrolledCourse')
 
 exports.getAllCourse = (req, res) => {
     try {
-        const allCourse=courseData
-        res.status(200).json({ success: true, allCourse})
+        const allCourse = courseData
+        res.status(200).json({ success: true, allCourse })
 
     } catch (err) {
         console.log(err)
@@ -14,7 +15,7 @@ exports.getAllCourse = (req, res) => {
 
 exports.getCourseDetail = async (req, res) => {
     try {
-        
+
         const id = req.params.id
         const course = courseData.find(course => course.id == id)
         if (course) {
@@ -27,5 +28,84 @@ exports.getCourseDetail = async (req, res) => {
         console.log(err)
         res.status(500).json({ success: false, message: err })
 
+    }
+}
+
+exports.enrollInCourse = async (req, res) => {
+    try {
+        const courseId = req.params.courseId
+        const user = req.user
+        const userId = req.user._id
+
+
+        const studentData = {
+            id: user._id,
+            name: user.name,
+            email: user.email
+        }
+
+        const enrollCourse = new EnrolledCourse({
+            courseId: courseId,
+            userId: userId,
+
+        })
+
+        await enrollCourse.save()
+        const course = courseData.find(course => course.id == courseId)
+        if (course) {
+            course.students.push(studentData)
+
+        } else {
+            throw new Error('Course not found')
+        }
+        res.status(200).json({ success: true, message: 'Successfully enrolled in course' })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+
+    }
+}
+
+exports.getEnrolledCourse = async (req, res) => {
+    try {
+        const userId = req.user._id
+
+        const enrolledDetail = await EnrolledCourse.find({ userId: userId })
+
+        const enrolledCourses = enrolledDetail.map(enrollment => {
+            const course = courseData.find(course => course.id === parseInt(enrollment.courseId));
+            return course;
+        });
+
+        res.status(200).json({ success: true, enrolledCourses })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+
+    }
+}
+exports.markCourseComplete = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const courseId = req.params.courseId
+
+        const course = await EnrolledCourse.findOne({
+            userId: userId,
+            courseId: courseId
+        });
+
+        if (course) {
+            course.isCompleted = true
+            await course.save()
+        } else {
+            throw new Error('Something went wrong!')
+        }
+
+        res.status(200).json({ success: true, message: 'Successfully marked course as completed!' })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
     }
 }
