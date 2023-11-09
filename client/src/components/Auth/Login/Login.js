@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../../store/slice/auth-slice';
+import Button from '@mui/material/Button';
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -53,8 +54,7 @@ const Login = () => {
                             <h3 className='login__subTitle'>Password</h3>
                             <input className='login__input' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <button className='login__button'>LOG IN</button>
-                    </form>
+                        <Button onClick={handleLogin} sx={{width:'500px'}} variant="contained">Login</Button>                    </form>
                     <div className='login__link'>
                         <Link style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }} to='/sign-up'> <h3 style={{ cursor: 'pointer', fontSize: '13px', textDecoration: 'none' }}>Create new account?</h3></Link>
 

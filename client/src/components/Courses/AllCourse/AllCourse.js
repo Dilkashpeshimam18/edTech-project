@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import './AllCourse.css'
+import Divider from '@mui/material/Divider';
 
 const AllCourse = () => {
     const [courses, setCourses] = useState([])
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(0)
+    const [searchVal, setSearchVal] = useState('')
 
     const initialRowState = () => {
         const value = 5;
@@ -17,6 +20,10 @@ const AllCourse = () => {
     const [rowPerPage, setRowPerPage] = useState(initialRowState)
     const handleRowPerPage = (e) => {
         setRowPerPage(e.target.value)
+    }
+
+    const handleSearchInput = (e) => {
+        setSearchVal(e.target.value)
     }
 
     // const getCourses = async () => {
@@ -64,7 +71,9 @@ const AllCourse = () => {
 
     // }, [])
     return (
-        <div>
+        <div className='allCourse'>
+
+
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -83,13 +92,28 @@ const AllCourse = () => {
 
             {courses.map((course) => {
                 return (
-                    <div key={course.id}>
-                        <Link to={`course-detail/${course.id}`}>
-                            <h3>Course name:{course.name}</h3>
-                        </Link>
-                        <span>{course.description}</span>
-                        <p>Instructor:{course.instructor}</p>
-                    </div>
+                    <>
+                        <div className='courseList' key={course.id}>
+                            <div>
+                                <img style={{ width: '230px', height: '135px' }} src={course?.thumbnail} />
+                            </div>
+                            <div style={{marginLeft:'10px'}}>   
+                               <Link to={`course-detail/${course.id}`}>
+                                <h3>{course.name}</h3>
+                            </Link>
+                                <span>{course.description}</span>
+                                <p>Instructor:{course.instructor}</p>
+                            </div>
+
+                        </div>
+                        <Divider sx={{
+                            margin: '10px', width: '100%',
+                            maxWidth: 760,
+                            bgcolor: 'background.paper',
+                        }} />
+
+                    </>
+
                 )
             })}
 

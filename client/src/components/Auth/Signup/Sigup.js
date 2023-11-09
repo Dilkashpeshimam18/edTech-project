@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import Button from '@mui/material/Button';
 
 const SignUp = () => {
     const [name, setName] = useState('')
@@ -29,7 +30,6 @@ const SignUp = () => {
             }
 
 
-
         } catch (err) {
             console.log(err)
             alert(err)
@@ -54,8 +54,7 @@ const SignUp = () => {
                             <h3 className='login__subTitle'>Password</h3>
                             <input className='login__input' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <button className='login__button'>SIGN UP</button>
-                    </form>
+                        <Button onClick={handleSignUp} sx={{ width: '500px' }} variant="contained">Signup</Button>                    </form>
                     <div className='login__link'>
                         <Link style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }} to='/login'><h3 style={{ cursor: 'pointer', fontSize: '13px' }}>Login with existing account</h3></Link>
 

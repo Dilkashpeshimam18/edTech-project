@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../../store/slice/auth-slice'
 import { useDispatch } from 'react-redux'
 import './Logout.css'
+import Button from '@mui/material/Button';
+
 const Logout = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -15,7 +17,7 @@ const Logout = () => {
     }
     return (
         <div className='logout' onClick={handleLogout} >
-            <button className='header__authBtn'>Logout</button></div>
+        <Button variant="contained">Logout</Button></div>
     )
 }
 

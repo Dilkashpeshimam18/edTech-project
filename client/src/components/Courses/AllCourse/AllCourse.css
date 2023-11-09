@@ -1,0 +1,7 @@
+.allCourse {
+    flex: 0.7;
+    padding-top: 50px;
+}
+.courseList{
+    display: flex;
+}

@@ -1,0 +1,30 @@
+.courseSidebar {
+    flex: 0.3;
+    width: 100%;
+    padding-left: 400px;
+    padding-top: 60px;
+}
+.courseSidebar__container1
+{
+    display: flex;
+}
+
+.filter__button{
+    display: flex;
+    height: 55px;
+    width: 100px;
+    background-color: white;
+    border: 1px solid lightgray;
+    padding-bottom: 10px;
+    padding-right: 15px ;
+    justify-content: center;
+    align-items: center;
+}
+.courseSidebar__subContainer2{
+    margin-left: 15px;
+}
+@media only screen and (max-width: 600px) {
+    .courseSidebar {
+        padding-left: 20px;
+    }
+}
