@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import { useSelector } from 'react-redux';
 import './AllCourse.css'
 import Divider from '@mui/material/Divider';
 
@@ -11,34 +10,9 @@ const AllCourse = () => {
     const [courses, setCourses] = useState([])
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(0)
-    const [searchVal, setSearchVal] = useState('')
+    const rowPerPage = useSelector((state) => state.course.rowPerPage)
 
-    const initialRowState = () => {
-        const value = 10;
-        return value;
-    }
-    const [rowPerPage, setRowPerPage] = useState(initialRowState)
-    const handleRowPerPage = (e) => {
-        setRowPerPage(e.target.value)
-    }
-
-    const handleSearchInput = (e) => {
-        setSearchVal(e.target.value)
-    }
-
-    // const getCourses = async () => {
-    //     try {
-
-    //         const response = await axios.get(`http://localhost:4000/course/get-allCourses?page=${pageNumber}&rowPerPage=${rowPerPage}`)
-
-    //         const course = response.data.allCourse
-    //         setCourses(course)
-
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-    const handlePageChanged = async (event, value) => {
+    const handlePageChanged = async (event,value) => {
         try {
             let pageNumber;
             if (value == undefined) {
@@ -65,11 +39,6 @@ const AllCourse = () => {
 
     }, [rowPerPage])
 
-    // useEffect(() => {
-
-    //     getCourses()
-
-    // }, [])
     return (
         <div className='allCourse'>
 
@@ -80,10 +49,10 @@ const AllCourse = () => {
                             <div>
                                 <img style={{ width: '230px', height: '135px' }} src={course?.thumbnail} />
                             </div>
-                            <div style={{marginLeft:'10px'}}>   
-                               <Link to={`course-detail/${course.id}`}>
-                                <h3>{course.name}</h3>
-                            </Link>
+                            <div style={{ marginLeft: '10px' }}>
+                                <Link to={`course-detail/${course.id}`}>
+                                    <h3>{course.name}</h3>
+                                </Link>
                                 <span>{course.description}</span>
                                 <p>Instructor:{course.instructor}</p>
                             </div>

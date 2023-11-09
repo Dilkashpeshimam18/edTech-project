@@ -5,11 +5,14 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './CourseAccordion.css';
+import { useSelector } from 'react-redux';
 
-export default function CourseAccordion({ course }) {
+export default function CourseAccordion() {
+    const courseDetail = useSelector((state) => state.course.courseDetail)
+
     return (
         <div className='courseAccordion'>
-            {course?.syllabus.map((course) => {
+            {courseDetail?.syllabus?.map((course) => {
                 return (
                     <>
                         <Accordion sx={{ margin: '15px' }}>

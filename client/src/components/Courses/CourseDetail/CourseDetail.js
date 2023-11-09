@@ -8,14 +8,16 @@ import Button from '@mui/material/Button';
 import AvTimerOutlinedIcon from '@mui/icons-material/AvTimerOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
-import Divider from '@mui/material/Divider';
 import BasicTabs from './CourseDetailTab/CourseTab';
+import { courseActions } from '../../../store/slice/course-slice';
+import { useDispatch } from 'react-redux';
 
 const CourseDetail = () => {
     const { id } = useParams()
     const [course, setCourse] = useState()
     const userToken = useSelector(state => state.auth.userToken)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const getCourseDetail = async () => {
         try {
@@ -24,6 +26,8 @@ const CourseDetail = () => {
             console.log('Getting course detail>>', response)
 
             const course = response.data.course
+            dispatch(courseActions.addCourseDetail(course))
+
             setCourse(course)
 
         } catch (err) {
@@ -114,23 +118,23 @@ const CourseDetail = () => {
                                 </div>
 
                                 <div style={{ marginTop: '30px' }}>
-                                {userToken ? (
-                                    <Button
-                                      variant="contained"
-                                      sx={{ width: '200px', height: '55px' }}
-                                      onClick={course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined}
-                                    >
-                                      {course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
-                                    </Button>
-                                  ) : (
-                                    <Button
-                                      variant="contained"
-                                      sx={{ width: '200px', height: '55px' }}
-                                      onClick={() => navigate('/login')}
-                                    >
-                                      Log in to Enroll
-                                    </Button>
-                                  )}
+                                    {userToken ? (
+                                        <Button
+                                            variant="contained"
+                                            sx={{ width: '200px', height: '55px' }}
+                                            onClick={course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined}
+                                        >
+                                            {course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="contained"
+                                            sx={{ width: '200px', height: '55px' }}
+                                            onClick={() => navigate('/login')}
+                                        >
+                                            Log in to Enroll
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
 
@@ -139,7 +143,7 @@ const CourseDetail = () => {
                     </div>
                 </div >
 
-                <BasicTabs course={course} />
+                <BasicTabs />
 
             </section >
 

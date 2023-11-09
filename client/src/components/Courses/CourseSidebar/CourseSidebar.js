@@ -6,15 +6,21 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import BasicAccordion from './SidebarAccordion/SidebarAccordion';
+import { courseActions } from '../../../store/slice/course-slice';
+import { useDispatch } from 'react-redux';
+
 
 const CourseSidebar = () => {
   const initialRowState = () => {
-    const value = 5;
+    const value = 10;
     return value;
   }
   const [rowPerPage, setRowPerPage] = useState(initialRowState)
+  const dispatch = useDispatch()
+
   const handleRowPerPage = (e) => {
     setRowPerPage(e.target.value)
+    dispatch(courseActions.updateRowPerPage(e.target.value))
   }
 
   return (
@@ -35,22 +41,20 @@ const CourseSidebar = () => {
             >
               <MenuItem value={5}>5</MenuItem>
               <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={25}>25</MenuItem>
-              <MenuItem value={50}>50</MenuItem>
-
+              <MenuItem value={15}>15</MenuItem>
 
             </Select>
           </FormControl>
         </div>
         <div className='courseSidebar__subContainer2'>
           <button className='filter__button'>
-            <FilterListRoundedIcon sx={{paddingTop:'10px'}}/>
-           <p style={{paddingTop:'15px', marginLeft:'5px'}}>Filter</p> 
+            <FilterListRoundedIcon sx={{ paddingTop: '10px' }} />
+            <p style={{ paddingTop: '15px', marginLeft: '5px' }}>Filter</p>
           </button>
         </div>
       </div>
       <div className='courseSidebar__container2'>
-      <BasicAccordion />
+        <BasicAccordion />
       </div>
     </div>
   )

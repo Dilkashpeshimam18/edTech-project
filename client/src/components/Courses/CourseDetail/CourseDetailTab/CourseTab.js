@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CourseAccordion from '../CourseAccordion/CourseAccordion';
+import { useSelector } from 'react-redux';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -39,8 +40,9 @@ function a11yProps(index) {
     };
 }
 
-export default function BasicTabs({ course }) {
+export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
+    const courseDetail = useSelector((state) => state.course.courseDetail)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -56,11 +58,11 @@ export default function BasicTabs({ course }) {
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                <CourseAccordion course={course} />
+                <CourseAccordion  />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <ul>
-                    {course?.prerequisites?.map((prerequisite, index) => (
+                    {courseDetail?.prerequisites?.map((prerequisite, index) => (
                         <li key={index}>{prerequisite}</li>
                     ))}
                 </ul>
