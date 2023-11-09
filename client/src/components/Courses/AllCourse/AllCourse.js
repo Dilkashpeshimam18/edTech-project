@@ -5,14 +5,18 @@ import Pagination from '@mui/material/Pagination';
 import { useSelector } from 'react-redux';
 import './AllCourse.css'
 import Divider from '@mui/material/Divider';
+import { useDispatch } from 'react-redux';
+import { courseActions } from '../../../store/slice/course-slice';
 
 const AllCourse = () => {
     const [courses, setCourses] = useState([])
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(0)
     const rowPerPage = useSelector((state) => state.course.rowPerPage)
+    const allCourse = useSelector((state) => state.course.courses)
+    const dispatch = useDispatch()
 
-    const handlePageChanged = async (event,value) => {
+    const handlePageChanged = async (event, value) => {
         try {
             let pageNumber;
             if (value == undefined) {
@@ -28,6 +32,7 @@ const AllCourse = () => {
             const res = await axios.get(`http://localhost:4000/course/get-allCourses?page=${pageNumber}&rowPerPage=${rowPerPage}`)
             const course = res.data.courses
             setCourses(course)
+            dispatch(courseActions.addCourse(course))
             setLastPage(res.data.totalPages)
 
         } catch (err) {
@@ -42,7 +47,7 @@ const AllCourse = () => {
     return (
         <div className='allCourse'>
 
-            {courses.map((course) => {
+            {allCourse?.map((course) => {
                 return (
                     <>
                         <div className='courseList' key={course.id}>

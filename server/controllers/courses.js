@@ -3,10 +3,10 @@ const EnrolledCourse = require('../models/enrolledCourse')
 
 exports.getAllCourse = async (req, res) => {
     try {
-        // const allCourse = courseData
-        // res.status(200).json({ success: true, allCourse })
+
         const page = parseInt(req.query.page) || 1;
         const rowPerPage = parseInt(req.query.rowPerPage) || 10;
+
         const startIndex = (page - 1) * rowPerPage;
         const endIndex = startIndex + rowPerPage;
 
@@ -43,6 +43,32 @@ exports.getCourseDetail = async (req, res) => {
         console.log(err)
         res.status(500).json({ success: false, message: err })
 
+    }
+}
+
+exports.searchCourses = (req, res) => {
+    try {
+
+        const { query } = req.query;
+
+        if (!query) {
+            return res.status(400).json({ error: 'Query parameter is required' });
+        }
+
+        const results = courseData.filter(course => {
+            return (
+                course.name.toLowerCase().includes(query.toLowerCase()) ||
+                course.instructor.toLowerCase().includes(query.toLowerCase()) ||
+                course.description.toLowerCase().includes(query.toLowerCase())
+
+            );
+        });
+
+        res.status(200).json(results);
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
     }
 }
 
