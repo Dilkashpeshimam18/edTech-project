@@ -14,7 +14,7 @@ const AllCourse = () => {
     const [searchVal, setSearchVal] = useState('')
 
     const initialRowState = () => {
-        const value = 5;
+        const value = 10;
         return value;
     }
     const [rowPerPage, setRowPerPage] = useState(initialRowState)
@@ -72,23 +72,6 @@ const AllCourse = () => {
     // }, [])
     return (
         <div className='allCourse'>
-
-
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={rowPerPage}
-                label="Row"
-                onChange={handleRowPerPage}
-
-            >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={15}>15</MenuItem>
-                <MenuItem value={20}>20</MenuItem>
-
-
-            </Select>
 
             {courses.map((course) => {
                 return (
