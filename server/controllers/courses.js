@@ -72,6 +72,27 @@ exports.searchCourses = (req, res) => {
     }
 }
 
+exports.filterCourses = (req, res) => {
+    try {
+
+        res.status(200).json(courseData)
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+    }
+}
+
+exports.allCourses = (req, res) => {
+    try {
+        let courses = courseData
+        res.status(200).json({ success: true, courses })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+
+    }
+}
 exports.enrollInCourse = async (req, res) => {
     try {
         const courseId = req.params.courseId
@@ -150,3 +171,4 @@ exports.markCourseComplete = async (req, res) => {
         res.status(500).json({ success: false, message: err })
     }
 }
+

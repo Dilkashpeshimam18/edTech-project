@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialCourseState = {
     courses: [],
     courseDetail: {},
-    rowPerPage: 10
+    rowPerPage: 10,
+    allCourses: []
 
 }
 
@@ -16,6 +17,15 @@ const CourseSlice = createSlice({
                 state.courses = action.payload
             } else {
                 state.courses.push(action.payload)
+
+            }
+
+        },
+        addAllCourse(state, action) {
+            if (Array.isArray(action.payload)) {
+                state.allCourses = action.payload
+            } else {
+                state.allCourses.push(action.payload)
 
             }
 

@@ -257,7 +257,7 @@ const courseModel = [
         name: 'Data Engineering with Apache Spark',
         instructor: 'Sophia Davis',
         description: 'Learn data engineering techniques using Apache Spark for big data processing.',
-        enrollmentStatus: 'Open',
+        enrollmentStatus: 'Closed',
         thumbnail: 'https://miro.medium.com/v2/resize:fit:1200/0*WBxeZnyom3O6dRtM.png',
         duration: '10 weeks',
         schedule: 'Mondays and Wednesdays, 6:00 PM - 8:00 PM',
@@ -360,13 +360,13 @@ const courseModel = [
             },
         ]
     },
-   
+
     {
         id: 11,
         name: 'Game Development with Unity',
         instructor: 'Lucas Martinez',
         description: 'Learn game development using Unity and C# to create your own video games.',
-        enrollmentStatus: 'Open',
+        enrollmentStatus: 'Closed',
         thumbnail: 'https://blog.potenzaglobalsolutions.com/wp-content/uploads/2021/06/5-Rarely-Known-Advantages-And-Disadvantages-Of-Unity-Game-Development.jpg',
         duration: '12 weeks',
         schedule: 'Tuesdays and Thursdays, 7:00 PM - 9:00 PM',
@@ -406,7 +406,7 @@ const courseModel = [
         thumbnail: 'https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230318230239/Python-Data-Science-Tutorial.jpg',
         duration: '10 weeks',
         schedule: 'Mondays and Wednesdays, 6:30 PM - 8:30 PM',
-        location: 'Online',
+        location: 'In-Person',
         prerequisites: ['Intermediate data science knowledge'],
         syllabus: [
             {
@@ -438,7 +438,7 @@ const courseModel = [
         name: 'UI/UX Design Fundamentals',
         instructor: 'Noah Turner',
         description: 'Learn the principles of UI/UX design and create user-friendly interfaces.',
-        enrollmentStatus: 'Open',
+        enrollmentStatus: 'Closed',
         thumbnail: 'https://mdevelopers.com/storage/0_success-projects-ujj_d3a50aee.webp',
         duration: '8 weeks',
         schedule: 'Tuesdays and Thursdays, 6:00 PM - 8:00 PM',
@@ -505,7 +505,7 @@ const courseModel = [
             },
         ]
     },
-    
+
     {
         id: 15,
         name: 'Business Analytics and Data Visualization',
@@ -542,7 +542,7 @@ const courseModel = [
             },
         ]
     }
-    
+
 ];
 
-module.exports=courseModel;
+module.exports = courseModel;
