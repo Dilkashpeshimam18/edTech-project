@@ -51,15 +51,15 @@ const AllCourse = () => {
                     return (
                         <>
                             <div className='courseList' key={course.id}>
-                                <div>
-                                    <img style={{ width: '230px', height: '135px' }} src={course?.thumbnail} />
+                                <div className='courseList__imgContainer'>
+                                    <img className='courseList__img' src={course?.thumbnail} />
                                 </div>
                                 <div style={{ marginLeft: '10px' }}>
                                     <Link to={`course-detail/${course.id}`}>
-                                        <h3>{course.name}</h3>
+                                        <h3 className='courseName'>{course.name}</h3>
                                     </Link>
-                                    <span>{course.description}</span>
-                                    <p>Instructor:{course.instructor}</p>
+                                    <span className='courseInfo'>{course.description}</span>
+                                    <p className='courseInfo'>Instructor:{course.instructor}</p>
                                 </div>
 
                             </div>

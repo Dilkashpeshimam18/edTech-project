@@ -83,11 +83,16 @@
 
 @media only screen and (max-width: 700px) {
     .header__Container {
-        width: max-content;
+        width: 500px;
+    }
+
+    .search-form {
+        width: 100px;
+        padding: 0px;
     }
 
     .header__singleLinkText {
-        font-size: 8px;
+        font-size:9px;
     }
 
     .header__singleLink {
@@ -101,8 +106,13 @@
     .header__icons {
         font-size: 8px;
     }
+    .authButtons{
+        height: 40px;
+        width: 80px;
+        font-size: 9px;
+    }
 
     .header__Left {
-        width: 110px;
+        /* width: 100%; */
     }
 }

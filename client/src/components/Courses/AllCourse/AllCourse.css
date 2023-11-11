@@ -13,3 +13,24 @@
     overflow-y: scroll;
 
 }
+
+.courseList__img {
+    width: 230px;
+    height: 135px;
+}
+
+@media only screen and (max-width: 600px) {
+    .courseList__img {
+        width: 180px;
+        height: 110px;
+    }
+    .courseList__imgContainer{
+        padding-top: 30px;
+    }
+    .courseInfo{
+        font-size: 12px;
+    }
+    .courseName{
+        font-size: 15px;
+    }
+}

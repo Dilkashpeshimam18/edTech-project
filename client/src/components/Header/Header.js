@@ -42,7 +42,7 @@ const Header = () => {
                 <div className='header__Left'>
                     <div class="search-form">
                         <input value={search} onChange={handleSearch} onKeyPress={handleEnterKeyPress}
-                            className='search-form-input' type="text" name="search_box" required placeholder="Search courses by name, instructor or keywords..." maxlength="100" />
+                            className='search-form-input' type="text" name="search_box" required placeholder="Search..." maxlength="100" />
                         <SearchOutlinedIcon sx={{ color: 'gray', size: '5px' }} className='search-icon' />
                     </div>
 
@@ -62,7 +62,6 @@ const Header = () => {
                             {
                                 userToken ? (
                                     <>
-
                                         <div >
 
                                             <Logout />
@@ -73,7 +72,7 @@ const Header = () => {
 
                                 ) : (
                                     <div >
-                                        <Link to='/login'><Button variant="contained">Login</Button></Link>
+                                        <Link to='/login'><Button className='authButtons' variant="contained">Login</Button></Link>
 
                                     </div>
                                 )

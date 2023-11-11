@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 const Logout = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
+
     const handleLogout = () => {
         dispatch(authActions.logout())
         localStorage.removeItem('token')
@@ -17,7 +17,7 @@ const Logout = () => {
     }
     return (
         <div className='logout' onClick={handleLogout} >
-        <Button variant="contained">Logout</Button></div>
+            <Button className='authButtons' variant="contained">Logout</Button></div>
     )
 }
 

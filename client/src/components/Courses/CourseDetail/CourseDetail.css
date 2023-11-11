@@ -90,3 +90,10 @@
     height: 530px;
     /* padding-top:50px ; */
 }
+
+@media only screen and (max-width: 600px){
+.row{
+   height: 1400px;
+   margin-bottom: 100px;
+}
+}

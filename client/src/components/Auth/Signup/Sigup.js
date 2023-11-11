@@ -54,7 +54,7 @@ const SignUp = () => {
                             <h3 className='login__subTitle'>Password</h3>
                             <input className='login__input' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <Button onClick={handleSignUp} sx={{ width: '500px' }} variant="contained">Signup</Button>                    </form>
+                        <Button onClick={handleSignUp} className='login__button' variant="contained">Signup</Button>                    </form>
                     <div className='login__link'>
                         <Link style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }} to='/login'><h3 style={{ cursor: 'pointer', fontSize: '13px' }}>Login with existing account</h3></Link>
 

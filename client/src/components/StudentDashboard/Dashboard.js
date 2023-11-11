@@ -37,7 +37,7 @@ const Dashboard = () => {
         getUserInfo()
         let total = enrolledCourse.length
         setTotalEnrolled(total)
-    }, [])
+    }, [enrolledCourse])
     return (
         <div>
             <section class="teacher-profile">
@@ -51,8 +51,8 @@ const Dashboard = () => {
                             </div>
                             <div>
 
-                                <h3>{name} </h3>
-                                <span>{email}</span>
+                                <h3 className='userName'>{name} </h3>
+                                <span className='userEmail'>{email}</span>
                             </div>
                         </div>
 

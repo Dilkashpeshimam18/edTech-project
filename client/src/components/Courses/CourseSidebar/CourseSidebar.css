@@ -4,27 +4,36 @@
     padding-left: 300px;
     padding-top: 60px;
 }
-.courseSidebar__container1
-{
+
+.courseSidebar__container1 {
     display: flex;
 }
 
-.filter__button{
+.filter__button {
     display: flex;
     height: 55px;
     width: 100px;
     background-color: white;
     border: 1px solid lightgray;
     padding-bottom: 10px;
-    padding-right: 15px ;
+    padding-right: 15px;
     justify-content: center;
     align-items: center;
 }
-.courseSidebar__subContainer2{
+
+.courseSidebar__subContainer2 {
     margin-left: 15px;
 }
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 1100px) {
     .courseSidebar {
-        padding-left: 20px;
+        padding-left: 5px;
+        flex: 1;
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width:1500px) {
+    .courseSidebar {
+        padding-left: 5px;
     }
 }
