@@ -11,15 +11,16 @@ const EnrolledCourse = () => {
             {
                 enrolledCourse && enrolledCourse.map((course) => {
                     return (
-                        <Link to={`/course-detail/${course.id}`}>
+                        <Link style={{ textDecoration: 'none' }} to={`/course-detail/${course.id}`}>
 
                             <div className='product'>
                                 <img src={course?.thumbnail} className='product__img' alt='' />
                                 <div className='product__container'>
                                     <div className='product__body'>
-                                        <Link style={{ textDecoration: 'none' }} >
-                                            <span style={{ marginTop: '10px' }}>{course?.name}</span>  </Link>
+
+                                        <span style={{ marginTop: '10px' }}>{course?.name}</span>
                                         <span style={{ paddingTop: "5px" }} >{course?.instructor}</span>
+
                                     </div>
                                     <div >
 

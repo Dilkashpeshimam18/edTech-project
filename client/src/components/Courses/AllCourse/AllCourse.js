@@ -46,33 +46,35 @@ const AllCourse = () => {
 
     return (
         <div className='allCourse'>
+            <div className='allCourse__container'>
+                {allCourse?.map((course) => {
+                    return (
+                        <>
+                            <div className='courseList' key={course.id}>
+                                <div>
+                                    <img style={{ width: '230px', height: '135px' }} src={course?.thumbnail} />
+                                </div>
+                                <div style={{ marginLeft: '10px' }}>
+                                    <Link to={`course-detail/${course.id}`}>
+                                        <h3>{course.name}</h3>
+                                    </Link>
+                                    <span>{course.description}</span>
+                                    <p>Instructor:{course.instructor}</p>
+                                </div>
 
-            {allCourse?.map((course) => {
-                return (
-                    <>
-                        <div className='courseList' key={course.id}>
-                            <div>
-                                <img style={{ width: '230px', height: '135px' }} src={course?.thumbnail} />
                             </div>
-                            <div style={{ marginLeft: '10px' }}>
-                                <Link to={`course-detail/${course.id}`}>
-                                    <h3>{course.name}</h3>
-                                </Link>
-                                <span>{course.description}</span>
-                                <p>Instructor:{course.instructor}</p>
-                            </div>
+                            <Divider sx={{
+                                margin: '10px', width: '100%',
+                                maxWidth: 760,
+                                bgcolor: 'background.paper',
+                            }} />
 
-                        </div>
-                        <Divider sx={{
-                            margin: '10px', width: '100%',
-                            maxWidth: 760,
-                            bgcolor: 'background.paper',
-                        }} />
+                        </>
 
-                    </>
+                    )
+                })}
+            </div>
 
-                )
-            })}
 
             <div style={{ display: 'flex', alignItems: 'center', marginTop: "20px", justifyContent: 'center' }}>
                 <Pagination count={lastPage} page={page} onChange={handlePageChanged} variant="outlined"

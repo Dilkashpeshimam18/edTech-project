@@ -5,7 +5,8 @@ const initialCourseState = {
     courseDetail: {},
     rowPerPage: 10,
     allCourses: [],
-    enrolledCourse: []
+    enrolledCourse: [],
+    progressValue:0
 
 }
 
@@ -45,6 +46,9 @@ const CourseSlice = createSlice({
         },
         updateRowPerPage(state, action) {
             state.rowPerPage = action.payload
+        },
+        setProgressVal(state,action){
+            state.progressValue=action.payload
         }
     }
 })
@@ -83,7 +87,6 @@ export const getEnrolledCourse = () => {
             })
 
             const response = await reqInstance.get('http://localhost:4000/course/get-enrolled-course')
-            console.log('enrolled cpurse>>>', response)
             const courses = response.data.enrolledCourses
             dispatch(courseActions.addEnrolledCourse(courses))
 

@@ -12,6 +12,7 @@ import BasicTabs from './CourseDetailTab/CourseTab';
 import { courseActions } from '../../../store/slice/course-slice';
 import { useDispatch } from 'react-redux';
 import { getEnrolledCourse } from '../../../store/slice/course-slice';
+import LinearWithValueLabel from '../EnrolledCourse/LinearProgress';
 
 const CourseDetail = () => {
     const { id } = useParams()
@@ -78,8 +79,10 @@ const CourseDetail = () => {
 
             const response = await reqInstance.put(`http://localhost:4000/course/mark-course-complete/${id}`)
 
+
             if (response.status == 200) {
                 isCourseComplete()
+                dispatch(courseActions.setProgressVal(100))
 
             }
 
@@ -147,7 +150,19 @@ const CourseDetail = () => {
 
                                     <p style={{ display: 'flex' }}>
                                         <div ><AvTimerOutlinedIcon /></div>
-                                        <div style={{ paddingTop: '2px' }}>{course?.duration}, {course?.schedule} </div> </p>
+                                        {isCompleted ? (
+                                            <span>Submitted</span>
+                                        ) : isEnrolled ? (
+                                            <span>Due Date: 1 January</span>
+                                        ) : course?.enrollmentStatus === 'Open' ? (
+                                            <div style={{ paddingTop: '2px' }}>
+                                                {course?.duration}, {course?.schedule}
+                                            </div>
+                                        ) : (
+                                            <div style={{ paddingTop: '2px' }}>
+                                                {course?.duration}, {course?.schedule}
+                                            </div>
+                                        )} </p>
                                     <p style={{ display: 'flex' }}>
                                         <div><LocationOnOutlinedIcon /></div>
                                         <div style={{ paddingTop: '2px' }}> {course?.location}</div>
@@ -157,6 +172,12 @@ const CourseDetail = () => {
                                         <div style={{ fontSize: '14px', paddingTop: '1px' }}>Created by {course?.instructor}</div>
 
                                     </p>
+                                    {isEnrolled && !isCompleted && (
+                                        <p style={{ display: 'flex' }}>
+                                            <LinearWithValueLabel />
+                                        </p>
+                                    )}
+
                                 </div>
 
                                 <div style={{ marginTop: '30px' }}>
