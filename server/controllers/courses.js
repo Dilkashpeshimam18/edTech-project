@@ -185,7 +185,7 @@ exports.isCourseComplete = async (req, res) => {
             return res.status(200).json({ success: true, isCompleted: course.isCompleted })
 
         } else {
-            throw new Error('Something went wrong!')
+           return res.status(404).json({ success: false, error: 'Course not found' });
         }
 
     } catch (err) {

@@ -21,6 +21,7 @@ const CourseDetail = () => {
     const enrolledCourse = useSelector((state) => state.course.enrolledCourse)
     const [isEnrolled, setIsEnrolled] = useState(false)
     const [isCompleted, setIsCompleted] = useState(false)
+    const [isNotCourse, setIsNotCourse] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -43,6 +44,9 @@ const CourseDetail = () => {
 
         } catch (err) {
             console.log(err)
+            if (err.response.status == 404) {
+                setIsNotCourse(true)
+            }
         }
     }
 
@@ -120,95 +124,100 @@ const CourseDetail = () => {
 
     return (
         <div>
-            <section class="playlist-details">
+            {
+                isNotCourse ? <h1>Course Not Found!</h1> : (
+                    <section class="playlist-details">
 
 
-                <div class="row">
+                        <div class="row">
 
-                    <div class="column">
+                            <div class="column">
 
-                        <div class="thumb">
-                            <img src={course?.thumbnail} style={{ marginTop: '20px' }} alt="" />
-                            {isCompleted ? <span> Completed</span> : isEnrolled ? <span>Enrolled</span> : course?.enrollmentStatus === 'Open' ? <span>Open</span> : <span>Closed</span>}
-
-
-                        </div>
-                    </div>
-
-                    <div class="column" >
+                                <div class="thumb">
+                                    <img src={course?.thumbnail} style={{ marginTop: '20px' }} alt="" />
+                                    {isCompleted ? <span> Completed</span> : isEnrolled ? <span>Enrolled</span> : course?.enrollmentStatus === 'Open' ? <span>Open</span> : <span>Closed</span>}
 
 
-                        <div className='courseDetail__contaioner'>
-                            <h3 style={{ fontSize: '3rem', textTransform: 'capitalize', marginBottom: '2px' }}>{course?.name}</h3>
-                            <div>
-                                <div>
-                                    <p style={{
-                                        margin: '0px', padding: '0px', padding: '1rem 0',
-                                        lineHeight: '2',
-                                        fontSize: '1.8rem'
-                                    }}>{course?.description}</p>
-
-                                    <p style={{ display: 'flex' }}>
-                                        <div ><AvTimerOutlinedIcon /></div>
-                                        {isCompleted ? (
-                                            <span>Submitted</span>
-                                        ) : isEnrolled ? (
-                                            <span>Due Date: 1 January</span>
-                                        ) : course?.enrollmentStatus === 'Open' ? (
-                                            <div style={{ paddingTop: '2px' }}>
-                                                {course?.duration}, {course?.schedule}
-                                            </div>
-                                        ) : (
-                                            <div style={{ paddingTop: '2px' }}>
-                                                {course?.duration}, {course?.schedule}
-                                            </div>
-                                        )} </p>
-                                    <p style={{ display: 'flex' }}>
-                                        <div><LocationOnOutlinedIcon /></div>
-                                        <div style={{ paddingTop: '2px' }}> {course?.location}</div>
-                                    </p>
-                                    <p style={{ display: 'flex' }}>
-                                        <div><EditNoteOutlinedIcon /></div>
-                                        <div style={{ fontSize: '14px', paddingTop: '1px' }}>Created by {course?.instructor}</div>
-
-                                    </p>
-                                    {isEnrolled && !isCompleted && (
-                                        <p style={{ display: 'flex' }}>
-                                            <LinearWithValueLabel />
-                                        </p>
-                                    )}
-
-                                </div>
-
-                                <div style={{ marginTop: '30px' }}>
-                                    {userToken ? (
-                                        <Button
-                                            variant="contained"
-                                            sx={{ width: '200px', height: '55px' }}
-                                            onClick={isEnrolled ? markCourseComplete : (course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined)}
-                                        >
-                                            {isCompleted ? 'Course Completed' : isEnrolled ? ' Mark as Complete' : course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            variant="contained"
-                                            sx={{ width: '200px', height: '55px' }}
-                                            onClick={() => navigate('/login')}
-                                        >
-                                            Log in to Enroll
-                                        </Button>
-                                    )}
                                 </div>
                             </div>
 
+                            <div class="column" >
 
-                        </div>
-                    </div>
-                </div >
 
-                <BasicTabs />
+                                <div className='courseDetail__contaioner'>
+                                    <h3 style={{ fontSize: '3rem', textTransform: 'capitalize', marginBottom: '2px' }}>{course?.name}</h3>
+                                    <div>
+                                        <div>
+                                            <p style={{
+                                                margin: '0px', padding: '0px', padding: '1rem 0',
+                                                lineHeight: '2',
+                                                fontSize: '1.8rem'
+                                            }}>{course?.description}</p>
 
-            </section >
+                                            <p style={{ display: 'flex' }}>
+                                                <div ><AvTimerOutlinedIcon /></div>
+                                                {isCompleted ? (
+                                                    <span>Submitted</span>
+                                                ) : isEnrolled ? (
+                                                    <span>Due Date: 1 January</span>
+                                                ) : course?.enrollmentStatus === 'Open' ? (
+                                                    <div style={{ paddingTop: '2px' }}>
+                                                        {course?.duration}, {course?.schedule}
+                                                    </div>
+                                                ) : (
+                                                    <div style={{ paddingTop: '2px' }}>
+                                                        {course?.duration}, {course?.schedule}
+                                                    </div>
+                                                )} </p>
+                                            <p style={{ display: 'flex' }}>
+                                                <div><LocationOnOutlinedIcon /></div>
+                                                <div style={{ paddingTop: '2px' }}> {course?.location}</div>
+                                            </p>
+                                            <p style={{ display: 'flex' }}>
+                                                <div><EditNoteOutlinedIcon /></div>
+                                                <div style={{ fontSize: '14px', paddingTop: '1px' }}>Created by {course?.instructor}</div>
+
+                                            </p>
+                                            {isEnrolled && !isCompleted && (
+                                                <p style={{ display: 'flex' }}>
+                                                    <LinearWithValueLabel />
+                                                </p>
+                                            )}
+
+                                        </div>
+
+                                        <div style={{ marginTop: '30px' }}>
+                                            {userToken ? (
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{ width: '200px', height: '55px' }}
+                                                    onClick={isEnrolled ? markCourseComplete : (course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined)}
+                                                >
+                                                    {isCompleted ? 'Course Completed' : isEnrolled ? ' Mark as Complete' : course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{ width: '200px', height: '55px' }}
+                                                    onClick={() => navigate('/login')}
+                                                >
+                                                    Log in to Enroll
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div >
+
+                        <BasicTabs />
+
+                    </section >
+                )
+            }
+
 
 
         </div >
