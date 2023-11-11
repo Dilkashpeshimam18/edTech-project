@@ -5,7 +5,7 @@ export const initialAuthState = {
     userToken: localStorage.getItem('token') || null,
     userEmail: localStorage.getItem('email') || null,
     name: '',
-  }
+}
 
 
 const AuthSlice = createSlice({
@@ -22,7 +22,6 @@ const AuthSlice = createSlice({
             state.userEmail = null
             state.isAuthenticated = false
         },
-      
 
     }
 })

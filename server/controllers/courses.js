@@ -139,7 +139,7 @@ exports.getEnrolledCourse = async (req, res) => {
             return course;
         });
 
-        res.status(200).json({ success: true, enrolledCourses })
+        res.status(200).json({ success: true, enrolledCourses, enrolledDetail })
 
     } catch (err) {
         console.log(err)
@@ -171,4 +171,25 @@ exports.markCourseComplete = async (req, res) => {
         res.status(500).json({ success: false, message: err })
     }
 }
+exports.isCourseComplete = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const courseId = req.params.courseId
 
+        const course = await EnrolledCourse.findOne({
+            userId: userId,
+            courseId: courseId
+        });
+
+        if (course) {
+            return res.status(200).json({ success: true, isCompleted: course.isCompleted })
+
+        } else {
+            throw new Error('Something went wrong!')
+        }
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+    }
+}

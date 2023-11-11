@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import axios from "axios";
 const initialCourseState = {
     courses: [],
     courseDetail: {},
     rowPerPage: 10,
-    allCourses: []
+    allCourses: [],
+    enrolledCourse: []
 
 }
 
@@ -30,6 +31,15 @@ const CourseSlice = createSlice({
             }
 
         },
+        addEnrolledCourse(state, action) {
+            if (Array.isArray(action.payload)) {
+                state.enrolledCourse = action.payload
+            } else {
+                state.enrolledCourse.push(action.payload)
+
+            }
+
+        },
         addCourseDetail(state, action) {
             state.courseDetail = action.payload
         },
@@ -40,28 +50,53 @@ const CourseSlice = createSlice({
 })
 
 
-// export const getAllCourse = () => {
-//     return async (dispatch, state) => {
-//         const getRequest = async () => {
+export const getAllCourse = () => {
+    return async (dispatch, state) => {
+        const getRequest = async () => {
 
-//             const response = await axios.get('https://localhost:4000/courseexpense/get-allCourses')
+            const res = await axios.get('http://localhost:4000/course/allCourses')
+            const courses = res.data.courses
 
-//             console.log('Getting all course>>>',response)
-//             const data = response.data
+            dispatch(courseActions.addAllCourse(courses))
 
-//             // dispatch(courseActions.addExpense(data))
-
-//         }
-//         try{ 
-//                 await getRequest()
+        }
+        try {
+            await getRequest()
 
 
-//         } catch (err) {
-//             console.log(err)
-//         }
+        } catch (err) {
+            console.log(err)
+        }
 
-//     }
-// }
+    }
+}
+export const getEnrolledCourse = () => {
+    return async (dispatch, state) => {
+        const getRequest = async () => {
 
+            const token = localStorage.getItem('token')
+
+            let reqInstance = await axios.create({
+                headers: {
+                    Authorization: token
+                }
+            })
+
+            const response = await reqInstance.get('http://localhost:4000/course/get-enrolled-course')
+            console.log('enrolled cpurse>>>', response)
+            const courses = response.data.enrolledCourses
+            dispatch(courseActions.addEnrolledCourse(courses))
+
+        }
+        try {
+            await getRequest()
+
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+}
 export const courseActions = CourseSlice.actions
 export default CourseSlice.reducer

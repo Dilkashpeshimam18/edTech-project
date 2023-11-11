@@ -11,11 +11,15 @@ import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import BasicTabs from './CourseDetailTab/CourseTab';
 import { courseActions } from '../../../store/slice/course-slice';
 import { useDispatch } from 'react-redux';
+import { getEnrolledCourse } from '../../../store/slice/course-slice';
 
 const CourseDetail = () => {
     const { id } = useParams()
     const [course, setCourse] = useState()
     const userToken = useSelector(state => state.auth.userToken)
+    const enrolledCourse = useSelector((state) => state.course.enrolledCourse)
+    const [isEnrolled, setIsEnrolled] = useState(false)
+    const [isCompleted, setIsCompleted] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -23,10 +27,16 @@ const CourseDetail = () => {
         try {
 
             const response = await axios.get(`http://localhost:4000/course/get-courseDetail/${id}`)
-            console.log('Getting course detail>>', response)
 
             const course = response.data.course
             dispatch(courseActions.addCourseDetail(course))
+            let courseId = course.id
+            const isEnroll = enrolledCourse.find(course => course.id == courseId)
+
+            if (isEnroll) {
+                setIsEnrolled(true)
+            }
+
 
             setCourse(course)
 
@@ -46,12 +56,17 @@ const CourseDetail = () => {
             })
 
             const response = await reqInstance.put(`http://localhost:4000/course/enroll-inCourse/${id}`)
-            console.log(response)
+            dispatch(getEnrolledCourse())
+            if (response.status == 200) {
+                getCourseDetail()
+
+            }
+
         } catch (err) {
             console.log(err)
         }
     }
-    const getEnrolledCourse = async () => {
+    const markCourseComplete = async () => {
         try {
             const token = localStorage.getItem('token')
 
@@ -61,7 +76,31 @@ const CourseDetail = () => {
                 }
             })
 
-            const response = await reqInstance.get('http://localhost:4000/course/get-enrolled-course')
+            const response = await reqInstance.put(`http://localhost:4000/course/mark-course-complete/${id}`)
+
+            if (response.status == 200) {
+                isCourseComplete()
+
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    const isCourseComplete = async () => {
+        try {
+            const token = localStorage.getItem('token')
+
+            let reqInstance = await axios.create({
+                headers: {
+                    Authorization: token
+                }
+            })
+
+            const response = await reqInstance.get(`http://localhost:4000/course/is-courseCompleted/${id}`)
+
+            const isCompleted = response.data.isCompleted
+            setIsCompleted(isCompleted)
 
 
         } catch (err) {
@@ -69,9 +108,11 @@ const CourseDetail = () => {
         }
     }
     useEffect(() => {
-        getCourseDetail()
-        getEnrolledCourse()
+        isCourseComplete()
     }, [])
+    useEffect(() => {
+        getCourseDetail()
+    }, [enrollInCourse])
 
 
     return (
@@ -83,13 +124,14 @@ const CourseDetail = () => {
 
                     <div class="column">
 
-
                         <div class="thumb">
                             <img src={course?.thumbnail} style={{ marginTop: '20px' }} alt="" />
-                            <span>{course?.enrollmentStatus}</span>
+                            {isCompleted ? <span> Completed</span> : isEnrolled ? <span>Enrolled</span> : course?.enrollmentStatus === 'Open' ? <span>Open</span> : <span>Closed</span>}
+
 
                         </div>
                     </div>
+
                     <div class="column" >
 
 
@@ -122,9 +164,9 @@ const CourseDetail = () => {
                                         <Button
                                             variant="contained"
                                             sx={{ width: '200px', height: '55px' }}
-                                            onClick={course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined}
+                                            onClick={isEnrolled ? markCourseComplete : (course?.enrollmentStatus === 'Open' ? enrollInCourse : undefined)}
                                         >
-                                            {course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
+                                            {isCompleted ? 'Course Completed' : isEnrolled ? ' Mark as Complete' : course?.enrollmentStatus === 'Open' ? 'Enroll now' : 'Enrollment Closed'}
                                         </Button>
                                     ) : (
                                         <Button

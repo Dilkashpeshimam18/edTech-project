@@ -50,11 +50,11 @@ const Header = () => {
                 <div className='hedaer__Right'>
                     <div style={{ display: 'flex', alignItems: 'center' }} className='header__Links'>
                         <div className='header__singleLink'>
-                            <NavLink className='header_navLink' to='/'><p className='header__singleLinkText'>HOME</p></NavLink>
+                            <NavLink className='header_navLink' to='/'><p className='header__singleLinkText'>ALL COURSE</p></NavLink>
                         </div>
 
                         {userToken && <div className='header__singleLink'>
-                            <NavLink className='header_navLink' to='/store'><p className='header__singleLinkText'>DASHBOARD</p></NavLink>
+                            <NavLink className='header_navLink' to='/student-dashboard'><p className='header__singleLinkText'>MY DASHBOARD</p></NavLink>
                         </div>}
 
 

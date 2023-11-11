@@ -1,0 +1,97 @@
+.teacher-profile {
+    background-color: #f1f0f0;
+    max-width: 2000px;
+    max-height: 500px;
+    margin: 100px;
+    border-radius: 10px;
+}
+
+.teacher-profile .details {
+    text-align: center;
+    background-color: var(--white);
+    border-radius: .5rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    flex-direction: column;
+}
+
+  
+  .studentInfo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .avatar {
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+  
+  .studentInfo div {
+    text-align: center; /* If you want the text to be left-aligned within its container */
+  }
+  
+  .flex {
+    text-align: left; /* If you want the text in the "flex" div to be left-aligned */
+  }
+  .teacher-profile .details .student h3 {
+    font-size: 2rem;
+    color: var(--black);
+}
+
+.teacher-profile .details .student span {
+    color: var(--light-color);
+    font-size: 1.7rem;
+}
+
+.teacher-profile .details .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.teacher-profile .details .flex p {
+    flex: 1 1 20rem;
+    border-radius: .5rem;
+    background-color: white;
+    padding: 1.2rem 2rem;
+    font-size: 1.6rem;
+    color: var(--light-color);
+}
+
+.teacher-profile .details .flex p span {
+    color: #1976d2;
+} 
+  
+/* .teacher-profile .details .student .studentInfo {
+    width: 200px;
+    padding-left: 800px;
+}
+
+.avatar {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+*/
+
+.section {
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.heading {
+    font-size: 2.5rem;
+    color: var(--black);
+    margin-bottom: 2.5rem;
+    border-bottom: var(--border);
+    padding-bottom: 1.5rem;
+    text-transform: capitalize;
+}

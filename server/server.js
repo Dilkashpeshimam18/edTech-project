@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 const mongoose=require('mongoose')
 const authRoutes=require('./routes/auth')
 const courseRoutes=require('./routes/course')
-
+const userRoutes=require('./routes/user')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -21,6 +21,7 @@ mongoose.connect(
 
 app.use('/auth',authRoutes)
 app.use('/course',courseRoutes)
+app.use('/user',userRoutes)
 
 app.listen(4000, () => {
     console.log('SERVER RUNNING!!')
