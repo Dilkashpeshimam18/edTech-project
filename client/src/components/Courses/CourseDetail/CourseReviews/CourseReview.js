@@ -4,12 +4,14 @@ import './CourseReview.css'
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const CourseDetailReview = () => {
     const [allReview, setAllReview] = useState([])
     const [review, setReview] = useState('')
     const [name, setName] = useState('')
     const [userEmail, setUserEmail] = useState('')
+    const userToken = useSelector(state => state.auth.userToken)
 
     const { id } = useParams()
 
@@ -90,31 +92,34 @@ const CourseDetailReview = () => {
             </div>
 
 
+            {
+                userToken &&
+                <div className='productDetail__reviewFormContainer'>
+                    <form onSubmit={handleReview} className='productDetail__reviewForm'>
+
+                        <div className='productDetail__reviewInputContainer'>
+                            <p style={{ color: '#444444' }}>Add your review</p>
+                            <textarea value={review} onChange={(e) => setReview(e.target.value)} className='productDetail__reviewTextArea' type='text' required />
+                        </div>
+                        <div className='productDetail__reviewInputContainer'>
+                            <p style={{ color: '#444444' }}>Name</p>
+                            <input value={name} onChange={(e) => setName(e.target.value)} className='productDetail__reviewInput' type='text' required />
+                        </div>
+                        <div className='productDetail__reviewInputContainer'>
+                            <p style={{ color: '#444444' }}>Email</p>
+                            <input value={userEmail} onChange={(e) => setUserEmail(e.target.value)} className='productDetail__reviewInput' type='email' required />
+                        </div>
+                        <div className='productDetail__reviewButtonContainer'>
+                            <Button variant="contained"
+                                sx={{ width: '200px', height: '55px' }} type='submit'>Submit</Button>
+                        </div>
+
+                    </form>
+
+                </div>
+            }
 
 
-            <div className='productDetail__reviewFormContainer'>
-                <form onSubmit={handleReview} className='productDetail__reviewForm'>
-
-                    <div className='productDetail__reviewInputContainer'>
-                        <p style={{ color: '#444444' }}>Add your review</p>
-                        <textarea value={review} onChange={(e) => setReview(e.target.value)} className='productDetail__reviewTextArea' type='text' required />
-                    </div>
-                    <div className='productDetail__reviewInputContainer'>
-                        <p style={{ color: '#444444' }}>Name</p>
-                        <input value={name} onChange={(e) => setName(e.target.value)} className='productDetail__reviewInput' type='text' required />
-                    </div>
-                    <div className='productDetail__reviewInputContainer'>
-                        <p style={{ color: '#444444' }}>Email</p>
-                        <input value={userEmail} onChange={(e) => setUserEmail(e.target.value)} className='productDetail__reviewInput' type='email' required />
-                    </div>
-                    <div className='productDetail__reviewButtonContainer'>
-                        <Button variant="contained"
-                            sx={{ width: '200px', height: '55px' }} type='submit'>Submit</Button>
-                    </div>
-
-                </form>
-
-            </div>
 
         </div>
     )
