@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CourseAccordion from '../CourseAccordion/CourseAccordion';
 import { useSelector } from 'react-redux';
+import CourseDetailReview from '../CourseReviews/CourseReview';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -55,10 +56,12 @@ export default function BasicTabs() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab label="Course Content" {...a11yProps(0)} />
                     <Tab label="Prerequisite" {...a11yProps(1)} />
+                    <Tab label="Reviews" {...a11yProps(2)} />
+
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                <CourseAccordion  />
+                <CourseAccordion />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <ul>
@@ -66,6 +69,9 @@ export default function BasicTabs() {
                         <li key={index}>{prerequisite}</li>
                     ))}
                 </ul>
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+                 <CourseDetailReview />
             </CustomTabPanel>
 
         </>

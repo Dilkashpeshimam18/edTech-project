@@ -66,7 +66,7 @@ const CourseDetail = () => {
                 getCourseDetail()
 
             }
-
+            getCourseDetail()
         } catch (err) {
             console.log(err)
         }
@@ -119,7 +119,7 @@ const CourseDetail = () => {
     }, [])
     useEffect(() => {
         getCourseDetail()
-    }, [enrollInCourse])
+    }, [])
 
 
     return (

@@ -1,0 +1,129 @@
+.productDetail__reviewInput {
+    height: 50px;
+    width: 50%;
+    font-size: inherit;
+    box-sizing: border-box;
+}
+
+.productDetail__reviewTextArea {
+    min-height: 180px;
+    width: 50%;
+    font-size: inherit;
+    box-sizing: border-box;
+}
+
+.productDetail__reviewContainer {
+    padding-left: 125px;
+    margin-bottom: 30px;
+}
+
+.productDetail__reviewButton {
+    height: 50px;
+    width: 180px;
+    padding: 16px;
+    display: inline-block;
+    background-color: #3bc4d4;
+    border: none;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.productDetail__reviewButton:hover {
+    height: 50px;
+    width: 180px;
+    padding: 16px;
+    display: inline-block;
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.productDetail__reviewButtonContainer {
+    margin-top: 1rem;
+ 
+}
+
+.product__size {
+    background-color: white;
+    border: 1px solid lightgray;
+    height: 40px;
+    width: 40px;
+    margin: 6px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.product__sizeSelected {
+    background-color: white;
+    border: 1px solid #3bc4d4;
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: #3bc4d4;
+}
+
+.productDetail__sizesContainer {
+    padding-top: 1px;
+    margin-bottom: 8px;
+}
+
+.productDetail__subImages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.img__wrap {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.img__wrap img {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    object-fit: contain;
+}
+
+.active-img {
+    border: 2px solid #3bc4d4;
+}
+
+.productDetail__desc {
+    display: flex;
+    text-align: left;
+    color: #4e4e4e;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    width: 500px;
+}
+
+.productDetail__userImg {
+    padding-top: 33px;
+    margin-right: 20px;
+}
+
+.product__smallImage {
+    width: 640px;
+    height: 640px;
+}
+
+.small-image {
+    width: 640px;
+    height: 640px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .productDetail__reviewInput {
+        width: 240px;
+    }
+}
